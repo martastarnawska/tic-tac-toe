@@ -2,10 +2,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var emptyFields;
 
+  $("body").prepend("<h2> Garfield kontra Łoś </h2>");
+  $("h2").addClass("title");
+  $("body").append("<h3>ruch Garfielda </h3>");
+  $("h3").addClass("roundInfo");
+  $("body").append("<h4></h4>")
+  $("body").append("<h4></h4>")
+  var a =  $("h4").first();
+  var b =  $("h4").last()
+  var wynikA;
+  var wynikB;
+  $("body").append("<button type=button> resetuj wyniki </button>")
   var playerClasses = { //to jest obiekt - jak się do niego odnoszę, to mogę pobrać wartość danych elementów
     'playerA' : 'red',
     'playerB' : 'blue'
   };
+  $(".red").prepend("<img id='kot' src='Garfield.jpg'/>")
+
 
   var currentPlayer;
 
@@ -15,12 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // wybiera wszystkie divy
     emptyFields = 9
     var fields = document.querySelectorAll('.board > div');
-    currentPlayer = 'playerA'
-    fields.forEach(function(field){
-      field.addEventListener('click', fieldClickHandler);
-    });
+    currentPlayer = 'playerA';
+
+
+    fields.forEach(field => field.addEventListener('click', fieldClickHandler));
+          fields.forEach(field => field.removeAttribute('class'));
+    //    fields.forEach(field => removeAtributte('class'));
   // ten cały kawałek od fields.forEach, można równie dobrze zastąpić arrow function:
   // fields.forEach(field => field.addEventListener('click', fieldClickHandler));
+  wynikA = 0;
+  wynikB = 0;
+ a.text("punkty Garfielda: " + wynikA);
+ b.text("punkty Łosia: " + wynikB);
   }
 
 
@@ -28,10 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var playerClass = playerClasses[currentPlayer];
     this.classList.add(playerClass);
 
+
     if (currentPlayer === 'playerA') {
       currentPlayer = 'playerB';
+      $("h3").text("ruch Łosia");
     } else {
       currentPlayer = 'playerA';
+      $("h3").text("ruch Garfielda");
     }
 
     this.removeEventListener('click', fieldClickHandler);
@@ -57,25 +79,49 @@ function checkWinner() {
   var diagonal1 = fields[0].className + fields[4].className + fields[8].className;
   var diagonal2 = fields[2].className + fields[4].className + fields[6].className;
 
-  if (row1 === 'redredred' || row2 === 'redredred' || row3 === 'redredred' ||
-      column1 === 'redredred' || column2 === 'redredred' || column3 === 'redredred' ||
-      diagonal1 === 'redredred' || diagonal2 === 'redredred') {
-        alert("Red Wins!");
-        initGame()
-      }
+  var boardCheck = [
+    row1,
+    row2,
+    row3,
+    column1,
+    column2,
+    column3,
+    diagonal1,
+    diagonal2
+  ];
 
-    if (row1 === 'blueblueblue' || row2 === 'blueblueblue' || row3 === 'blueblueblue' ||
-        column1 === 'blueblueblue' || column2 === 'blueblueblue' || column3 === 'blueblueblue' ||
-        diagonal1 === 'blueblueblue' || diagonal2 === 'blueblueblue') {
-          alert("Red Wins!");
-          initGame()
-        }
-    if (emptyFields === 0) {
-      alert("Tie");
-      initGame()
-    }
+  if (boardCheck.includes('redredred')) {
+    setTimeout(() => {
+      alert("Garfield wygrywa!");
+      initGame();
+      wynikA++;
+      a.text("punkty Garfielda: " + wynikA);
+    }, 100);
+  }
 
-    console.log(emptyFields)
+  if (boardCheck.includes('blueblueblue')) {
+    setTimeout(() => {
+    alert("Łoś wygrywa!");
+    initGame();
+    wynikB++;
+    b.text(" punkty Łosia: " + wynikB);
+  }, 100);
+  }
+
+  if (emptyFields === 0 && !boardCheck.includes('blueblueblue') && !boardCheck.includes('redredred')) {
+    setTimeout(() => {
+    alert("Tie");
+    initGame();
+  }, 100);
+  }
+
 } // zamyka function checkWinner()
+
+$("button").click(function() {
+  wynikA = 0;
+  wynikB = 0;
+  a.text(" punkty gracza A: " + wynikA);
+  b.text(" punkty gracza B: " + wynikB);
+});
 
 });

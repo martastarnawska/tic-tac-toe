@@ -2,11 +2,16 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #778899;
+}
 .board {
 	height: 300px;
 	width: 300px;
 	margin: 0 auto;
 	font-size: 0;
+	margin-top: 1cm;
+	background-color: white;
 }
 
 .board div {
@@ -17,9 +22,22 @@
 }
 
 .red {
-	background-color: crimson;
+	background-image: url("Garfield.jpg");
+	background-size: 100px 100px;
 }
 
 .blue {
-	background-color: cornflowerblue;
+	background-image: url("łoś.png");
+	background-size: 100px 100px;
+	}
+
+.title {
+	text-align: center;
+	margin-top: 1cm
+}
+
+
+img {
+	height: 100px;
+	width: 100px;
 }
