@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
   $("body").append("<h4></h4>")
   var a =  $("h4").first();
   var b =  $("h4").last()
-  var wynikA;
-  var wynikB;
+  wynikA = 0;
+  wynikB = 0;
+  a.text("punkty Garfielda: " + wynikA);
+  b.text("punkty Łosia: " + wynikB);
   $("body").append("<button type=button> resetuj wyniki </button>")
   var playerClasses = { //to jest obiekt - jak się do niego odnoszę, to mogę pobrać wartość danych elementów
     'playerA' : 'red',
@@ -36,10 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //    fields.forEach(field => removeAtributte('class'));
   // ten cały kawałek od fields.forEach, można równie dobrze zastąpić arrow function:
   // fields.forEach(field => field.addEventListener('click', fieldClickHandler));
-  wynikA = 0;
-  wynikB = 0;
- a.text("punkty Garfielda: " + wynikA);
- b.text("punkty Łosia: " + wynikB);
+
+
   }
 
 
@@ -99,14 +99,16 @@ function checkWinner() {
     }, 100);
   }
 
+
   if (boardCheck.includes('blueblueblue')) {
     setTimeout(() => {
     alert("Łoś wygrywa!");
     initGame();
     wynikB++;
-    b.text(" punkty Łosia: " + wynikB);
+      b.text(" punkty Łosia: " + wynikB);
   }, 100);
   }
+
 
   if (emptyFields === 0 && !boardCheck.includes('blueblueblue') && !boardCheck.includes('redredred')) {
     setTimeout(() => {
