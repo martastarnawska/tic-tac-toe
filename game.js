@@ -120,8 +120,8 @@ function checkWinner() {
 $("button").click(function() {
   wynikA = 0;
   wynikB = 0;
-  a.text(" punkty gracza A: " + wynikA);
-  b.text(" punkty gracza B: " + wynikB);
+  a.text("punkty Garfielda: " + wynikA);
+  b.text("punkty Łosia: " + wynikB);
 });
 
 });
